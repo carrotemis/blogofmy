@@ -74,22 +74,24 @@
 
 
 
+  <link rel="alternate" href="/rss2.xml" title="Ada 的个人博客主页" type="application/atom+xml">
 
 
 
 
 
-<meta name="description" content="你是哥哥还是 MM">
+
+<meta name="description" content="当然我也在扯淡。。">
 <meta name="keywords" content="前端开发">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Ada 的个人主页">
+<meta property="og:title" content="Ada 的个人博客主页">
 <meta property="og:url" content="http://adashuai5.com/archives/2018/07/index.html">
-<meta property="og:site_name" content="Ada 的个人主页">
-<meta property="og:description" content="你是哥哥还是 MM">
+<meta property="og:site_name" content="Ada 的个人博客主页">
+<meta property="og:description" content="当然我也在扯淡。。">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ada 的个人主页">
-<meta name="twitter:description" content="你是哥哥还是 MM">
+<meta name="twitter:title" content="Ada 的个人博客主页">
+<meta name="twitter:description" content="当然我也在扯淡。。">
 
 
 
@@ -124,8 +126,8 @@
 
 
 
-
-  <title>归档 | Ada 的个人主页</title>
+<link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
+  <title>归档 | Ada 的个人博客主页</title>
   
 
 
@@ -155,7 +157,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Ada 的个人主页</span>
+        <span class="site-title">Ada 的个人博客主页</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -386,8 +388,10 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Zhou Yuanda">
+            
               <p class="site-author-name" itemprop="name">Zhou Yuanda</p>
-              <p class="site-description motion-element" itemprop="description">你是哥哥还是 MM</p>
+              <p class="site-description motion-element" itemprop="description">当然我也在扯淡。。</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -410,7 +414,36 @@
           </nav>
 
           
+            <div class="feed-link motion-element">
+              <a href="/rss2.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Adashuai5" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/zhouyuanda/activities" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-gratipay"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/zhouyuanda" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
           
 
           
@@ -444,6 +477,15 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Zhou Yuanda</span>
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">29.5k</span>
   
 </div>
 
@@ -503,6 +545,8 @@
   
 
 
+  
+
 
 
 
@@ -541,6 +585,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -595,6 +644,28 @@
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'rCHTUodUQxhggekUOHOTeWkS-gzGzoHsz',
+        appKey: 'ekqWCAPWHp5Ioq6vrzC1foPT',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 

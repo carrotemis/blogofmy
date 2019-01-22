@@ -28,7 +28,7 @@ ISP、局域网、操作系统、浏览器等都会有相应的DNS缓存机制�
 ## 3. HTTP 请求及响应
 直接讲优化策略
 #### 3.1 避免不必要的重定向
-&gt; 最浪费的重定向经常发生、而且很容易被忽略：URL 末尾应该添加/但未添加。比如，访问http://astrology.yahoo.com/astrology将被301重定向到 http://astrology.yahoo.com/astrology/（注意末尾的 /）。如果使用 Apache，可以通过Alias或mod_rewrite或DirectorySlash解决这个问题。
+>最浪费的重定向经常发生、而且很容易被忽略：URL 末尾应该添加/但未添加。比如，访问http://astrology.yahoo.com/astrology将被301重定向到 http://astrology.yahoo.com/astrology/（注意末尾的 /）。如果使用 Apache，可以通过Alias或mod_rewrite或DirectorySlash解决这个问题。
 #### 3.2 Cookie
 ##### 3.2.1减少 Cookie 大小
 每次请求都会带上对应的 Cookie，减少 Cookie 大小可以降低其对响应速度的影响：
@@ -67,13 +67,13 @@ HTTP 请求的另一个优化方案是增加同时请求的数量，浏览器会
 - 用户交互时才会显示的内容。
 
 遵循「渐进增强」理念开发的网站：JavaScript用于增强用用户体验，但没有（不支持） JavaScript也能正常工作，完全可以延迟加载JavaScript。
-&gt;将首屏以外的HTML放在不渲染的元素中，如隐藏的&lt;textarea&gt;，或者type属性为非执行脚本的 &lt;script&gt; 标签中，减少初始渲染的DOM元素数量，提高速度。等首屏加载完成或者用户操作时，再去渲染剩余的页面内容。
+>将首屏以外的HTML放在不渲染的元素中，如隐藏的&lt;textarea&gt;，或者type属性为非执行脚本的 &lt;script&gt; 标签中，减少初始渲染的DOM元素数量，提高速度。等首屏加载完成或者用户操作时，再去渲染剩余的页面内容。
 #### 3.7 预加载
 预先加载利用浏览器空闲时间请求将来要使用的资源，以便用户访问下一页面时更快地响应。
 ## 4. 浏览器解析渲染页面
 响应完成后，浏览器下载完资源，就开始解析资源生成页面了。对于前端来说，这部分内容是完全需要我们去掌控的，我们也来简单介绍一下对应的优化内容，部分内容如懒加载等上面已经提及就不再重复。
 #### 4.1 写对文档类型声明 &lt;!DOCTYPE html&gt;
-&gt;这个声明的目的是防止浏览器在渲染文档时，切换到我们称为“[怪异模式(兼容模式)](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Quirks_Mode_and_Standards_Mode)”的渲染模式。“`&lt;!DOCTYPE html&gt;`" 确保浏览器按照最佳的相关规范进行渲染，而不是使用一个不符合规范的渲染模式。
+>这个声明的目的是防止浏览器在渲染文档时，切换到我们称为“[怪异模式(兼容模式)](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Quirks_Mode_and_Standards_Mode)”的渲染模式。“`&lt;!DOCTYPE html&gt;`" 确保浏览器按照最佳的相关规范进行渲染，而不是使用一个不符合规范的渲染模式。
 
 不写或写错文档类型声明，会浪费浏览器渲染页面的时间或引起错误排版。
 #### 4.2 CSS 放在 &lt;head&gt; 中
@@ -102,7 +102,7 @@ HTTP 请求的另一个优化方案是增加同时请求的数量，浏览器会
 #### 4.6 图片优化
 如何将图片变得又小又好看是一个工程师实力的体现，这里不过多赘述，大家可以查看我后文提供的资源。
 #### 4.7 使用 CND
-&gt;内容分发网络（Content delivery network 或 Content distribution network）是指一种透过互联网互相连接的计算机网络系统，利用最靠近每位用户的服务器，更快、更可靠地将音乐、图片、影片、应用程序及其他文件发送给用户，来提供高性能、可扩展性及低成本的网络内容传递给用户。
+>内容分发网络（Content delivery network 或 Content distribution network）是指一种透过互联网互相连接的计算机网络系统，利用最靠近每位用户的服务器，更快、更可靠地将音乐、图片、影片、应用程序及其他文件发送给用户，来提供高性能、可扩展性及低成本的网络内容传递给用户。
 
 动态 CDN，使用离你最近的服务器；CDN 没有 Cookie，使用 CDN 可以减少 Cookie；CND 会自动合并脚本文件等，减少请求数量；当然，使用 CND 同时也增加了一个域名，增大了同时请求数量。
 # 总结

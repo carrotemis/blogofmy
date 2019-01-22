@@ -74,22 +74,24 @@
 
 
 
+  <link rel="alternate" href="/rss2.xml" title="Ada 的个人博客主页" type="application/atom+xml">
 
 
 
 
 
-<meta name="description" content="你是哥哥还是 MM">
+
+<meta name="description" content="当然我也在扯淡。。">
 <meta name="keywords" content="前端开发">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Ada 的个人主页">
+<meta property="og:title" content="Ada 的个人博客主页">
 <meta property="og:url" content="http://adashuai5.com/index.html">
-<meta property="og:site_name" content="Ada 的个人主页">
-<meta property="og:description" content="你是哥哥还是 MM">
+<meta property="og:site_name" content="Ada 的个人博客主页">
+<meta property="og:description" content="当然我也在扯淡。。">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ada 的个人主页">
-<meta name="twitter:description" content="你是哥哥还是 MM">
+<meta name="twitter:title" content="Ada 的个人博客主页">
+<meta name="twitter:description" content="当然我也在扯淡。。">
 
 
 
@@ -124,8 +126,8 @@
 
 
 
-
-  <title>Ada 的个人主页</title>
+<link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
+  <title>Ada 的个人博客主页</title>
   
 
 
@@ -156,7 +158,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Ada 的个人主页</span>
+        <span class="site-title">Ada 的个人博客主页</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -238,11 +240,11 @@
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhou Yuanda">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ada 的个人主页">
+      <meta itemprop="name" content="Ada 的个人博客主页">
     </span>
 
     
@@ -278,6 +280,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/29/从「从输入URL到页面加载」谈及Web性能优化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/29/从「从输入URL到页面加载」谈及Web性能优化/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -285,6 +297,25 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.9k
+                </span>
+              
+
+              
+
+              
+            </div>
           
 
           
@@ -314,7 +345,9 @@
 <h4 id="1-2-减少页面的唯一域名"><a href="#1-2-减少页面的唯一域名" class="headerlink" title="1.2 减少页面的唯一域名"></a>1.2 减少页面的唯一域名</h4><p>因为每次 DNS 查询就是查找唯一域名的过程，那么域名越少，DNS 查询就越少，应该尽量将资源放在同一域名。当然这样做又有其他问题，下文详解。</p>
 <h2 id="2-TCP-连接"><a href="#2-TCP-连接" class="headerlink" title="2. TCP 连接"></a>2. TCP 连接</h2><p>经典的三次握手和四次挥手，不展开赘述。<br>简单讲讲优化方案：TCP 连接复用（TCP Connection Reuse），在 HTTP 请求头中的 Connection 上加 keep-alive；HTTP/2.0 多路复用等。</p>
 <h2 id="3-HTTP-请求及响应"><a href="#3-HTTP-请求及响应" class="headerlink" title="3. HTTP 请求及响应"></a>3. HTTP 请求及响应</h2><p>直接讲优化策略</p>
-<h4 id="3-1-避免不必要的重定向"><a href="#3-1-避免不必要的重定向" class="headerlink" title="3.1 避免不必要的重定向"></a>3.1 避免不必要的重定向</h4><p>&gt; 最浪费的重定向经常发生、而且很容易被忽略：URL 末尾应该添加/但未添加。比如，访问<a href="http://astrology.yahoo.com/astrology将被301重定向到" target="_blank" rel="noopener">http://astrology.yahoo.com/astrology将被301重定向到</a> <a href="http://astrology.yahoo.com/astrology/（注意末尾的" target="_blank" rel="noopener">http://astrology.yahoo.com/astrology/（注意末尾的</a> /）。如果使用 Apache，可以通过Alias或mod_rewrite或DirectorySlash解决这个问题。</p>
+<h4 id="3-1-避免不必要的重定向"><a href="#3-1-避免不必要的重定向" class="headerlink" title="3.1 避免不必要的重定向"></a>3.1 避免不必要的重定向</h4><blockquote>
+<p>最浪费的重定向经常发生、而且很容易被忽略：URL 末尾应该添加/但未添加。比如，访问<a href="http://astrology.yahoo.com/astrology将被301重定向到" target="_blank" rel="noopener">http://astrology.yahoo.com/astrology将被301重定向到</a> <a href="http://astrology.yahoo.com/astrology/（注意末尾的" target="_blank" rel="noopener">http://astrology.yahoo.com/astrology/（注意末尾的</a> /）。如果使用 Apache，可以通过Alias或mod_rewrite或DirectorySlash解决这个问题。</p>
+</blockquote>
 <h4 id="3-2-Cookie"><a href="#3-2-Cookie" class="headerlink" title="3.2 Cookie"></a>3.2 Cookie</h4><h5 id="3-2-1减少-Cookie-大小"><a href="#3-2-1减少-Cookie-大小" class="headerlink" title="3.2.1减少 Cookie 大小"></a>3.2.1减少 Cookie 大小</h5><p>每次请求都会带上对应的 Cookie，减少 Cookie 大小可以降低其对响应速度的影响：</p>
 <ul>
 <li>去除不必要的 Cookie；</li>
@@ -338,10 +371,15 @@
 <li>非首屏使用的数据、样式、脚本、图片等；</li>
 <li>用户交互时才会显示的内容。</li>
 </ul>
-<p>遵循「渐进增强」理念开发的网站：JavaScript用于增强用用户体验，但没有（不支持） JavaScript也能正常工作，完全可以延迟加载JavaScript。<br>&gt;将首屏以外的HTML放在不渲染的元素中，如隐藏的&lt;textarea&gt;，或者type属性为非执行脚本的 &lt;script&gt; 标签中，减少初始渲染的DOM元素数量，提高速度。等首屏加载完成或者用户操作时，再去渲染剩余的页面内容。</p>
+<p>遵循「渐进增强」理念开发的网站：JavaScript用于增强用用户体验，但没有（不支持） JavaScript也能正常工作，完全可以延迟加载JavaScript。</p>
+<blockquote>
+<p>将首屏以外的HTML放在不渲染的元素中，如隐藏的&lt;textarea&gt;，或者type属性为非执行脚本的 &lt;script&gt; 标签中，减少初始渲染的DOM元素数量，提高速度。等首屏加载完成或者用户操作时，再去渲染剩余的页面内容。</p>
+</blockquote>
 <h4 id="3-7-预加载"><a href="#3-7-预加载" class="headerlink" title="3.7 预加载"></a>3.7 预加载</h4><p>预先加载利用浏览器空闲时间请求将来要使用的资源，以便用户访问下一页面时更快地响应。</p>
 <h2 id="4-浏览器解析渲染页面"><a href="#4-浏览器解析渲染页面" class="headerlink" title="4. 浏览器解析渲染页面"></a>4. 浏览器解析渲染页面</h2><p>响应完成后，浏览器下载完资源，就开始解析资源生成页面了。对于前端来说，这部分内容是完全需要我们去掌控的，我们也来简单介绍一下对应的优化内容，部分内容如懒加载等上面已经提及就不再重复。</p>
-<h4 id="4-1-写对文档类型声明-lt-DOCTYPE-html-gt"><a href="#4-1-写对文档类型声明-lt-DOCTYPE-html-gt" class="headerlink" title="4.1 写对文档类型声明 &lt;!DOCTYPE html&gt;"></a>4.1 写对文档类型声明 &lt;!DOCTYPE html&gt;</h4><p>&gt;这个声明的目的是防止浏览器在渲染文档时，切换到我们称为“<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Quirks_Mode_and_Standards_Mode" target="_blank" rel="noopener">怪异模式(兼容模式)</a>”的渲染模式。“<code>&amp;lt;!DOCTYPE html&amp;gt;</code>“ 确保浏览器按照最佳的相关规范进行渲染，而不是使用一个不符合规范的渲染模式。</p>
+<h4 id="4-1-写对文档类型声明-lt-DOCTYPE-html-gt"><a href="#4-1-写对文档类型声明-lt-DOCTYPE-html-gt" class="headerlink" title="4.1 写对文档类型声明 &lt;!DOCTYPE html&gt;"></a>4.1 写对文档类型声明 &lt;!DOCTYPE html&gt;</h4><blockquote>
+<p>这个声明的目的是防止浏览器在渲染文档时，切换到我们称为“<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Quirks_Mode_and_Standards_Mode" target="_blank" rel="noopener">怪异模式(兼容模式)</a>”的渲染模式。“<code>&amp;lt;!DOCTYPE html&amp;gt;</code>“ 确保浏览器按照最佳的相关规范进行渲染，而不是使用一个不符合规范的渲染模式。</p>
+</blockquote>
 <p>不写或写错文档类型声明，会浪费浏览器渲染页面的时间或引起错误排版。</p>
 <h4 id="4-2-CSS-放在-lt-head-gt-中"><a href="#4-2-CSS-放在-lt-head-gt-中" class="headerlink" title="4.2 CSS 放在 &lt;head&gt; 中"></a>4.2 CSS 放在 &lt;head&gt; 中</h4><p>把样式表放在 &lt;head&gt; 中可以让页面渐进渲染，尽早呈现视觉反馈，给用户加载速度很快的感觉。<br>这对内容比较多的页面尤为重要，用户可以先查看已经下载渲染的内容，而不是盯着白屏等待。<br>如果把样式表放在页面底部，一些浏览器为减少重绘，会在 CSS 加载完成以后才渲染页面，用户只能对着白屏干瞪眼，用户体验极差。把样式表放到文档的HEAD部分能让页面看起来加载地更快。</p>
 <h4 id="4-2-把脚本放在页面底部"><a href="#4-2-把脚本放在页面底部" class="headerlink" title="4.2 把脚本放在页面底部"></a>4.2 把脚本放在页面底部</h4><p>浏览器下载脚本时，会阻塞其他资源并行下载，即使是来自不同域名的资源，并且，没有 js 并不邮箱呈现在用户目前的内容的观感。因此，最好将脚本放在底部，以提高页面加载速度。<br>一些特殊场景无法将脚本放到页面底部的，可以考虑&lt;script&gt;的以下属性：</p>
@@ -360,7 +398,9 @@
 <li>尽早处理事件，在 DOMContentLoaded 即可进行，不用等到 load 以后。</li>
 </ul>
 <h4 id="4-6-图片优化"><a href="#4-6-图片优化" class="headerlink" title="4.6 图片优化"></a>4.6 图片优化</h4><p>如何将图片变得又小又好看是一个工程师实力的体现，这里不过多赘述，大家可以查看我后文提供的资源。</p>
-<h4 id="4-7-使用-CND"><a href="#4-7-使用-CND" class="headerlink" title="4.7 使用 CND"></a>4.7 使用 CND</h4><p>&gt;内容分发网络（Content delivery network 或 Content distribution network）是指一种透过互联网互相连接的计算机网络系统，利用最靠近每位用户的服务器，更快、更可靠地将音乐、图片、影片、应用程序及其他文件发送给用户，来提供高性能、可扩展性及低成本的网络内容传递给用户。</p>
+<h4 id="4-7-使用-CND"><a href="#4-7-使用-CND" class="headerlink" title="4.7 使用 CND"></a>4.7 使用 CND</h4><blockquote>
+<p>内容分发网络（Content delivery network 或 Content distribution network）是指一种透过互联网互相连接的计算机网络系统，利用最靠近每位用户的服务器，更快、更可靠地将音乐、图片、影片、应用程序及其他文件发送给用户，来提供高性能、可扩展性及低成本的网络内容传递给用户。</p>
+</blockquote>
 <p>动态 CDN，使用离你最近的服务器；CDN 没有 Cookie，使用 CDN 可以减少 Cookie；CND 会自动合并脚本文件等，减少请求数量；当然，使用 CND 同时也增加了一个域名，增大了同时请求数量。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><img src="https://upload-images.jianshu.io/upload_images/7094266-2696c8f1d212f5d4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>该文大量参考了雅虎 35 军规，增加了一些自己的理解并舍弃了一些已经过时的内容。细节内容比较少，主要是笼统地将 Web 性能优化的思路做了梳理，很多内容都值得我们去深入研究。当然其中部分内容顺序还是不佳，因为很多内容事实上是贯穿在整个过程当中的，正如 Web 性能优化是个整体，需要权衡所有冲突。希望本文可以给你一些在面试官问道你时的思路。<br>深入阅读 <a href="https://zhuanlan.zhihu.com/p/34453198" target="_blank" rel="noopener">从输入URL到页面加载的过程？如何由一道题完善自己的前端知识体系！</a></p>
 <p>本文参考：<br><a href="https://juejin.im/post/5b73ef38f265da281e048e51" target="_blank" rel="noopener">前端性能优化之雅虎35条军规</a><br><a href="https://segmentfault.com/a/1190000006879700" target="_blank" rel="noopener">前端经典面试题: 从输入URL到页面加载发生了什么？</a><br>MDN<br>维基百科</p>
@@ -417,11 +457,11 @@
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhou Yuanda">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ada 的个人主页">
+      <meta itemprop="name" content="Ada 的个人博客主页">
     </span>
 
     
@@ -457,6 +497,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/20/优先级-和-CSS-预处理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/20/优先级-和-CSS-预处理/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -464,6 +514,25 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.3k
+                </span>
+              
+
+              
+
+              
+            </div>
           
 
           
@@ -569,11 +638,11 @@
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhou Yuanda">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ada 的个人主页">
+      <meta itemprop="name" content="Ada 的个人博客主页">
     </span>
 
     
@@ -609,6 +678,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/02/浅谈JS继承/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/11/02/浅谈JS继承/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -616,6 +695,25 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.1k
+                </span>
+              
+
+              
+
+              
+            </div>
           
 
           
@@ -722,11 +820,11 @@
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhou Yuanda">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ada 的个人主页">
+      <meta itemprop="name" content="Ada 的个人博客主页">
     </span>
 
     
@@ -762,6 +860,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/28/正则表达式速记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/10/28/正则表达式速记/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -769,6 +877,25 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.6k
+                </span>
+              
+
+              
+
+              
+            </div>
           
 
           
@@ -888,11 +1015,11 @@
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhou Yuanda">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ada 的个人主页">
+      <meta itemprop="name" content="Ada 的个人博客主页">
     </span>
 
     
@@ -928,6 +1055,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/27/理解虚拟-DOM/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/09/27/理解虚拟-DOM/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -935,6 +1072,25 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.1k
+                </span>
+              
+
+              
+
+              
+            </div>
           
 
           
@@ -1018,11 +1174,11 @@
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhou Yuanda">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ada 的个人主页">
+      <meta itemprop="name" content="Ada 的个人博客主页">
     </span>
 
     
@@ -1058,6 +1214,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/16/HTTP-学习之-Cookie/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/09/16/HTTP-学习之-Cookie/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1065,6 +1231,25 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  867
+                </span>
+              
+
+              
+
+              
+            </div>
           
 
           
@@ -1163,11 +1348,11 @@
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhou Yuanda">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ada 的个人主页">
+      <meta itemprop="name" content="Ada 的个人博客主页">
     </span>
 
     
@@ -1203,6 +1388,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/10/CSS常用布局-续篇/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/09/10/CSS常用布局-续篇/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1210,6 +1405,25 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  578
+                </span>
+              
+
+              
+
+              
+            </div>
           
 
           
@@ -1297,11 +1511,11 @@
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhou Yuanda">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ada 的个人主页">
+      <meta itemprop="name" content="Ada 的个人博客主页">
     </span>
 
     
@@ -1337,6 +1551,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/04/AJAX-是什么鬼/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/09/04/AJAX-是什么鬼/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1344,6 +1568,25 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2k
+                </span>
+              
+
+              
+
+              
+            </div>
           
 
           
@@ -1463,11 +1706,11 @@
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhou Yuanda">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ada 的个人主页">
+      <meta itemprop="name" content="Ada 的个人博客主页">
     </span>
 
     
@@ -1503,6 +1746,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/02/OOP-初探（给-MVC-添加类）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/09/02/OOP-初探（给-MVC-添加类）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1510,6 +1763,25 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.9k
+                </span>
+              
+
+              
+
+              
+            </div>
           
 
           
@@ -1606,11 +1878,11 @@
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhou Yuanda">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ada 的个人主页">
+      <meta itemprop="name" content="Ada 的个人博客主页">
     </span>
 
     
@@ -1646,6 +1918,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/27/搞懂这些-你就理解-this-了/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/搞懂这些-你就理解-this-了/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1653,6 +1935,25 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  524
+                </span>
+              
+
+              
+
+              
+            </div>
           
 
           
@@ -1757,8 +2058,10 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Zhou Yuanda">
+            
               <p class="site-author-name" itemprop="name">Zhou Yuanda</p>
-              <p class="site-description motion-element" itemprop="description">你是哥哥还是 MM</p>
+              <p class="site-description motion-element" itemprop="description">当然我也在扯淡。。</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -1781,7 +2084,36 @@
           </nav>
 
           
+            <div class="feed-link motion-element">
+              <a href="/rss2.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Adashuai5" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/zhouyuanda/activities" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-gratipay"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/zhouyuanda" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
           
 
           
@@ -1815,6 +2147,15 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Zhou Yuanda</span>
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">29.5k</span>
   
 </div>
 
@@ -1874,6 +2215,8 @@
   
 
 
+  
+
 
 
 
@@ -1912,6 +2255,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -1966,6 +2314,28 @@
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'rCHTUodUQxhggekUOHOTeWkS-gzGzoHsz',
+        appKey: 'ekqWCAPWHp5Ioq6vrzC1foPT',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 
