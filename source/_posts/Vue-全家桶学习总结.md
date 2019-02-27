@@ -104,7 +104,7 @@ Vue.use(VueRouter)
 const router = new VueRouter({
   routes:[{
     path:'/user/:userId', // 指定要跳转的路径
-    name: 'user',
+    name: 'user', // 命名路由，便于路由跳转
     component: User// 指定要跳转的组件
     }]
 })
@@ -112,19 +112,101 @@ const User = ({
   template: '<div>User</div>'
 })
 ```
-
 ## 确定视图加载的位置
-
+视图可以添加命名，如果 router-view 没有设置名字，那么默认为 default
 ```
 <router-view></router-view>
+<router-view name="a"></router-view>
 ```
-
+```
+const router = new VueRouter({
+  routes: [
+    {
+      path: '/',
+      components: { // 同个路由，多个视图就需要多个组件,components 要有(s)
+        default: Foo,
+        a: Bar
+      }
+    }
+  ]
+})
+```
 ## 实现路由跳转
 
 ```
-<router-link :to="{ name: 'user', params: { userId: 123 }}">User</router-link>
+<router-link :to="{ name: 'user', params: { userId: 123 }}">User</router-link> // 路由导航到 /user/123
 ```
+等同于代码调用 router.push() 
+```
+// 编程式导航
+router.push({ name: 'user', params: { userId: 123 }}) // 路由导航到 /user/123
+```
+## 路由传参
+使用动态路由参数，以冒号开头
+```
+const User = {
+  template: '<div>User</div>'
+}
 
+const router = new VueRouter({
+  routes: [
+    // 动态路径参数 以冒号开头
+    { path: '/user/:id', component: User }
+  ]
+})
+```
+现在呢，像 /user/foo 和 /user/bar 都将映射到相同的路由。
+
+当匹配到一个路由时，参数值会被设置到 this.$route.params，可以在每个组件内使用。
+```
+const User = {
+  template: '<div>User {{ $route.params.id }}</div>'
+}
+```
+## 响应路由参数变化
+动态路由会引起组件复用，如果想对路由参数的变化作出响应，可以简单地 **watch** (监测变化) $route 对象：
+```
+const User = {
+  template: '...',
+  watch: {
+    '$route' (to, from) {
+      // 对路由变化作出响应...
+    }
+  }
+}
+```
+或者使用 **beforeRouteUpdate** 导航守卫
+
+```
+const User = {
+  template: '...',
+  beforeRouteUpdate (to, from, next) {
+    // react to route changes...
+    // don't forget to call next()
+  }
+}
+```
+## 路由组件参数解耦
+在组件中使用 $route 会使之与其对应路由形成高度耦合，从而使组件只能在某些特定的 URL 上使用，限制了其灵活性。可使用 props 解耦组件：
+```
+const User = {
+  props: ['id'],
+  template: '<div>User {{ id }}</div>'
+}
+const router = new VueRouter({
+  routes: [
+    { path: '/user/:id', component: User, props: true },
+
+    // 对于包含命名视图的路由，你必须分别为每个命名视图添加 `props` 选项：
+    {
+      path: '/user/:id',
+      components: { default: User, sidebar: Sidebar },
+      props: { default: true, sidebar: false }
+    }
+  ]
+})
+```
+props 有三种模式：布尔模式、对象模式、函数模式
 # Vuex
 
 Vuex 是一个为 Vue.js 开发的状态管理模式：采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。
@@ -248,5 +330,3 @@ this.$http.post('/user', qs.stringify({
   })
 );
 ```
----
-待完善。。
