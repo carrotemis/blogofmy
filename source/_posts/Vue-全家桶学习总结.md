@@ -302,6 +302,15 @@ import axios from 'axios'
 ```
 Vue.prototype.$http = axios
 ```
+## 设置全局 axios 默认值
+```
+// 设置基础路径，一般为后端接口线上地址根路径
+axios.defaults.baseURL = 'https://api.example.com';
+// 设置默认 token
+axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+// 默认 POST 请求
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+```
 ## axios 的 url 有两种传递参数的形式
 ```
 // 第一种 对象形式
@@ -329,4 +338,87 @@ this.$http.post('/user', qs.stringify({
    ID: 12345
   })
 );
+```
+## 实现增删改查
+### 发起 GET 请求：查
+![](https://upload-images.jianshu.io/upload_images/7094266-12145e74b1272089.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+```
+const axios = require('axios') // 下同省略
+
+//发起一个user请求，参数为给定的ID
+axios.get('/user?ID=12345')
+  .then((response) => {
+    console.log(response)
+  }
+  .catch((error) => {
+    console.log(error)
+  }
+```
+### 发起 POST 请求：增
+![](https://upload-images.jianshu.io/upload_images/7094266-8609f819ec24a9ad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+```
+axios.post('/user', {
+  firstName: 'yuanda',
+  lastName: 'zhou'
+})
+  .then((response) => {
+    console.log(response)
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+```
+```
+axios.request(config)
+axios.get(url[,config])
+axios.delete(url[,config]) // 删除
+axios.head(url[,config])
+axios.options(url[,config])
+axios.post(url[,data[,config]])
+axios.put(url[,data[,config]]) // 改
+axios.patch(url[,data[,config]])
+```
+PUT 和 POST 方法的区别是,PUT方法是幂等的：连续调用一次或者多次的效果相同（无副作用）。连续调用同一个POST可能会带来额外的影响，比如多次提交订单。
+## 并发请求
+```
+function getUserAccount(){
+    return axios.get('/user/12345');
+}
+
+function getUserPermissions(){
+    return axios.get('/user/12345/permissions');
+}
+
+axios.all([getUerAccount(),getUserPermissions()])
+    .then(axios.spread(function(acc,pers){
+        //两个请求现在都完成
+    }));
+```
+axios.all 使用的是类似 Primise.all 的功能，所以如果其中有一个请求出现了错误那么就会停止请求，所以建议对于单个请求最好附加上处理的 catch。
+## 拦截器 interceptors
+你可以在**请求**或者**响应**被 then 或者 catch 处理之前对他们进行拦截。
+```
+//添加一个请求拦截器
+axios.interceptors.request.use(function(config){
+    //在请求发送之前做一些事
+    return config;
+},function(error){
+    //当出现请求错误是做一些事
+    return Promise.reject(error);
+});
+
+//添加一个返回拦截器
+axios.interceptors.response.use(function(response){
+    //对返回的数据进行一些处理
+    return response;
+},function(error){
+    //对返回的错误进行一些处理
+    return Promise.reject(error);
+});
+```
+用 eject 移除拦截器
+```
+var myInterceptor = axios.interceptors.request.use(function(){/*...*/});
+axios.interceptors.request.eject(myInterceptor);
 ```
